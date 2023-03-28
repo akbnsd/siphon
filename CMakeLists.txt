@@ -37,9 +37,9 @@ include(cmake/searchLib.cmake)
 
 
 # replace projectNameHere 
-set(prjName projectNameHere)
-project(projectNameHere)
-generate(projectNameHere)
+set(prjName siphon)
+project(siphon)
+generate(siphon)
 
 include(cmake/tests.cmake)
 include(cmake/genDocs.cmake)

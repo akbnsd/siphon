@@ -32,7 +32,7 @@ function(generate prjName)
     target_precompile_headers(i-${prjName} INTERFACE pch.hpp)
     
 
-    # add main executable
-    add_executable(${prjName} ${sources} ${prjName}.cpp)
+    # add libraries
+    add_library(${prjName} ${sources})
 
 endfunction(generate prjName)
