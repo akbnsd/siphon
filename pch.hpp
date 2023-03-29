@@ -1,6 +1,6 @@
 #include <iostream>
+#include <string.h>
 #include <string>
-
 
 // build configuration specific code
 #ifndef NDEBUG

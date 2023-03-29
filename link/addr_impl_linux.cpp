@@ -17,9 +17,32 @@
 #ifdef _LINUX
 
 #include "addr.hpp"
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 
+void addr::update()
+{
+    if(ip == "" && port <= 0) return;
 
+    sockaddr_in in;
+    sockaddr_in6 in6;
+
+    // check whether ip of IPV4 or IPV6
+    IPV4 = (inet_pton(AF_INET, ip.c_str(), &in.sin_addr)) ? true : !inet_pton(AF_INET6, ip.c_str(), &in6.sin6_addr);
+
+    if(IPV4){
+        in.sin_family = AF_INET;
+        in.sin_port = htons(port);
+
+        memcpy(n_addr, &in, sizeof(in));
+    }else{
+        in6.sin6_family = AF_INET6;
+        in6.sin6_port = htons(port);
+        memcpy(n_addr, &in6, sizeof(in6));
+    };
+    
+};
 
 
 #endif

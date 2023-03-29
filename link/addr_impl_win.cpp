@@ -19,4 +19,7 @@
 #error WINDOWS IMPLEMENTATION NOT DEFINED
 
 
+void addr::updateInfo()
+{
+}
 #endif
