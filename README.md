@@ -1,13 +1,16 @@
 # `Siphon `
-siphon is currently under development
 
-Siphon is a networking library.
+Siphon is a networking library for quick networking setup.
+Currently siphon supports
+- TCP / UDP   protocols
+- IPV4 / IPV6 addressing
+- Linux platform
+  
+siphon is currently under development.
+With following Upcoming features
+- Windows / Mac support
+- OS routing table management
 
-# Features 
-- cross platform: supports windows / linux
-- TCP / UDP communication
-- IPV4 / IPV6 communication
-- can manage OS routing tables
 
-# How to ??
+# How to guide ?
 README updates required. 

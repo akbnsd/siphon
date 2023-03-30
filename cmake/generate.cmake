@@ -34,5 +34,6 @@ function(generate prjName)
 
     # add libraries
     add_library(${prjName} ${sources})
+    target_link_libraries(${prjName} i-${prjName})
 
 endfunction(generate prjName)

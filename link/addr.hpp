@@ -14,22 +14,58 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef ADDR_HPP
+#define ADDR_HPP
+
+
 #include "pch.hpp"
+
+// ipv6 address struct size
+#define MAX_ADDRESS_SIZE 28
 
 /**
  * @brief addr manages ip addresses
- * 
  */
 struct addr
 {
+    /**
+     * @brief port and ip of host
+     * port can range from 1 to 65535
+     * ip can be of IPV4 or IPV6 in presentation format as shown.
+     * IPV4  ->    x.x.x.x      where  0 =< x =< 255
+     * IPV6  ->    xxxx.xxxx.xxxx.xxxx      where  x is in hexadecimal notation
+     * call update() when either of them is changed to update native data.
+     */
     int port=0;
     std::string ip="";
 
-    void updateInfo();
+    /** @brief updates host details in native dataset
+     * @param reverse if set to true, the ip is updated from native dataset
+     */
+    void update(bool reverse=false);
+
+    /**
+     * @brief 
+     * overloaded operators  <<, so that we can do this
+     * addr << "127.0.0.1" << 8080;
+     */
+    const addr& operator<<(std::string ip);
+    const addr& operator<<(int port);
+
+    //getNative address access 
+    inline void* getNAddr() { return n_addr; };
+
+    inline bool isValid() { return valid; }
+
+    // flags to save address type
+    bool IPV4=true;
 
 private:
-    // TODO: create a generic type
-    void* n_addr;
 
-
+    // stores data in network notation
+    char n_addr[MAX_ADDRESS_SIZE];
+    bool valid=false;
 };
+
+
+#endif //  ADDR_HPP

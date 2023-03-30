@@ -14,13 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifdef _LINUX
 
-#include "link.hpp"
-#include "addr.hpp"
-
+#ifdef _WIN32
+#error WINDOWS IMPLEMENTATION NOT DEFINED
 
 
-
-
+void addr::updateInfo()
+{
+}
 #endif

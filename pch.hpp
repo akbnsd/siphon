@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string.h>
 #include <string>
+#include <memory>
 
 
 // build configuration specific code
