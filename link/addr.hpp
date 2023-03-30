@@ -55,16 +55,16 @@ struct addr
     //getNative address access 
     inline void* getNAddr() { return n_addr; };
 
-    inline bool isIPV4() { return IPV4; }
+    inline bool isValid() { return valid; }
 
-    friend class socket;
+    // flags to save address type
+    bool IPV4=true;
 
 private:
 
     // stores data in network notation
     char n_addr[MAX_ADDRESS_SIZE];
-    // flags to save address type
-    bool IPV4=true;
+    bool valid=false;
 };
 
 

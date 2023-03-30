@@ -14,33 +14,61 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef LINK_HPP
+#define LINK_HPP
 
+
+#include "addr.hpp"
 /**
  * @brief link manages connections with the remote hosts
  */
-
 class link
 {
 public:
 
-    /**
-     * @brief constructs a locally bound port
-     * 
-     * @param port port to bind
-     * calling the constructor creates a local bound link.
-     * This should be only done once for a port. The individual connections @links should be created
-     * through fork calls. 
-     */
-    link(int port);
+    enum flags{
+        IPV4 = 0x00,
+        IPV6 = 0x01,
+        TCP  = 0x00,
+        UDP =  0x02
+    };
 
 
+    typedef bool (*requestHandler)(); 
 
-    link fork();
+    link(int port, int flg = IPV4 | TCP);
+
+    bool send(char* data, int length, addr adr = addr());
+    // TODO: overload send
+    // inline bool send(std::string& data, addr& adr) { return send((char*)data.c_str(), data.length(), adr); }
+
+    int recv(char* data, int size);
+    int recv(char* data, int size, addr& recvAddr);
+    // TODO: overload recv
+    // int recv(std::string* writeTo, addr& recvAddr);
+
+    bool listen(int backlog = 5);
 
 
+    bool accept(link& lnk);
+
+    bool connect(addr adr);
+
+    inline bool isValid() { return fd != -1;}
+    inline const addr& getRemoteAddr() { return remote; }
+    void shut();
+
+    ~link();
 
 private:
-    void* mSock;
+    int fd=-1;
+    bool ipv4=true, tcp=true;
+    addr remote;
+
+
     
 
 };
+
+
+#endif // LINK_HPP
