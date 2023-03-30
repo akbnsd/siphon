@@ -21,10 +21,18 @@
 #include <arpa/inet.h>
 
 
-void addr::update()
+void addr::update(bool reverse)
 {
-    if(ip == "" && port <= 0) return;
+    if(reverse){
+        char address[40];
+        inet_ntop((IPV4) ? AF_INET : AF_INET6 , n_addr, address, 40);
 
+        ip = address;
+        return;
+    }
+    else if(ip == "" && port <= 0) return;
+
+    // if not reverse and ip and port are valid
     sockaddr_in in;
     sockaddr_in6 in6;
 
@@ -41,7 +49,6 @@ void addr::update()
         in6.sin6_port = htons(port);
         memcpy(n_addr, &in6, sizeof(in6));
     };
-    
 };
 
 

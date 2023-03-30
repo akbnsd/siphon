@@ -39,8 +39,10 @@ struct addr
     int port=0;
     std::string ip="";
 
-    /** @brief updates host details in native dataset.*/
-    void update();
+    /** @brief updates host details in native dataset
+     * @param reverse if set to true, the ip is updated from native dataset
+     */
+    void update(bool reverse=false);
 
     /**
      * @brief 
@@ -52,6 +54,10 @@ struct addr
 
     //getNative address access 
     inline void* getNAddr() { return n_addr; };
+
+    inline bool isIPV4() { return IPV4; }
+
+    friend class socket;
 
 private:
 
