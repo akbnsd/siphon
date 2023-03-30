@@ -96,14 +96,15 @@ bool link::listen(int backlog)
 
 bool link::accept(link& child)
 {
-    socklen_t len=0;
-    int fd = ::accept(fd, (sockaddr*) child.remote.getNAddr(), &len);
     child = *this;
-    child.fd = fd;
+    socklen_t len= sizeof(sockaddr_in6);
+    child.fd = ::accept(fd, (sockaddr*) child.remote.getNAddr(), &len);
+    if( child.fd == -1) return false;
     child.remote.update(true);
+    return true;
 }
 
-bool link::connect(addr adr)
+bool link:: connect(addr adr)
 {
     return ::connect(fd, (sockaddr*) adr.getNAddr(), (ipv4) ? sizeof(sockaddr_in) : sizeof(sockaddr_in6)) != -1;
 }
