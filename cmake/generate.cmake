@@ -28,8 +28,8 @@ function(generate prjName)
     add_library(i-${prjName} INTERFACE)
     target_sources(i-${prjName} INTERFACE ${sources})
     target_link_libraries(i-${prjName} INTERFACE ${libraries})
-    target_include_directories(i-${prjName} INTERFACE ${CMAKE_SOURCE_DIR})
-    target_precompile_headers(i-${prjName} INTERFACE pch.hpp)
+    target_include_directories(i-${prjName} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+    target_precompile_headers(i-${prjName} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/pch.hpp)
     
 
     # add libraries
