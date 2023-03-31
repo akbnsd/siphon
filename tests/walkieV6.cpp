@@ -66,7 +66,6 @@ int main(){
         cout << "enter remote port:";
         cin >> adr.port;
 
-        adr.update();
 
         char data[100];
 
@@ -92,7 +91,6 @@ int main(){
         cout << "enter remote port:";
         cin >> adr.port;
 
-        adr.update();
 
         while(1){
             printf("trying to connect %s : %d\n", adr.ip.c_str(), adr.port);
