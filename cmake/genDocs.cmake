@@ -22,7 +22,7 @@ OPTION(BUILD_DOCS "Generate Doxygen (html) documentation" ON)
 
 if(${BUILD_DOCS})
 find_package(Doxygen
-    REQUIRED dot
+    COMPONENTS dot
     OPTIONAL_COMPONENTS mscgen dia)
 endif()
 
