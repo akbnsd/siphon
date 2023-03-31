@@ -15,6 +15,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+// windows implementation for addr methods
+
 #ifdef _WIN32
 #error WINDOWS IMPLEMENTATION NOT DEFINED
 

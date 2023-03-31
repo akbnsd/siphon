@@ -43,6 +43,6 @@ if(${Doxygen_FOUND})
 
     set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/docs)
 
-    doxygen_add_docs(chitra_docs  ${CMAKE_SOURCE_DIR} ALL )
+    doxygen_add_docs(${prjName}_docs  ${CMAKE_SOURCE_DIR} ALL )
 
 endif()

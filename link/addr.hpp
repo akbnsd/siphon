@@ -20,51 +20,75 @@
 
 #include "pch.hpp"
 
-// ipv6 address struct size
+/// @brief maximum number of bytes required to store address
 #define MAX_ADDRESS_SIZE 28
 
 /**
- * @brief addr manages ip addresses
+ * @brief addr class manages ip addresses and its conversions across byte orders.
+ * 
+ * @details
+ * set addr.ip and addr.port addr.IPV4 to requierd values. \n
+ * getNAddr() returns pointer to native address.
+ * 
+ * what is native address? \n
+ *      It is the address stored in platform specfic struct. The address is in NETWORK BITE ORDER (Big Endian)
+ * 
+ * \n usage   addr << "127.0.0.1" << 80;
  */
 struct addr
 {
     /**
-     * @brief port and ip of host
-     * port can range from 1 to 65535
+     * @brief port and ip of host.
+     * 
+     * @details
+     * port can range from 1 to 65535.
      * ip can be of IPV4 or IPV6 in presentation format as shown.
-     * IPV4  ->    x.x.x.x      where  0 =< x =< 255
-     * IPV6  ->    xxxx.xxxx.xxxx.xxxx      where  x is in hexadecimal notation
+     * IPV4  ->    "x.x.x.x"      where  0 =< x =< 255
+     * IPV6  ->    "xxxx.xxxx.xxxx.xxxx"      where  x is in hexadecimal notation
      * call update() when either of them is changed to update native data.
      */
     int port=0;
+    /// @copydoc port
     std::string ip="";
 
-    /** @brief updates host details in native dataset
-     * @param reverse if set to true, the ip is updated from native dataset
-     */
-    void update(bool reverse=false);
+    /// @brief set to true   if IPV4 address, false  for IPv6
+    bool IPV4=true;
+
 
     /**
      * @brief 
-     * overloaded operators  <<, so that we can do this
+     * overloaded operators  <<, so that we can do this. \n
      * addr << "127.0.0.1" << 8080;
      */
     const addr& operator<<(std::string ip);
     const addr& operator<<(int port);
 
-    //getNative address access 
-    inline void* getNAddr() { return n_addr; };
+    /**
+     * @brief return native address
+     * 
+     * @return getNaddr() return pointer to native address
+     */
+    void* getNAddr();
 
-    inline bool isValid() { return valid; }
+    /// @brief checks if address is valid
+    /// @return true, if valid, else false
+    bool isValid();
 
-    // flags to save address type
-    bool IPV4=true;
 
+    friend class link;
 private:
 
     // stores data in network notation
     char n_addr[MAX_ADDRESS_SIZE];
     bool valid=false;
+
+
+    /** @brief updates native address based on (string) ip and (int) port provided.
+     * The native native address is used for all operations. 
+     * 
+     * @param reverse if set to true, the (ip,port) is updated from native address
+     */
+    void update(bool reverse=false);
 };
 
 

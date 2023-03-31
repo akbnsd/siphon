@@ -106,6 +106,7 @@ bool link::accept(link& child)
 
 bool link:: connect(addr adr)
 {
+    adr.update();
     return ::connect(fd, (sockaddr*) adr.getNAddr(), (ipv4) ? sizeof(sockaddr_in) : sizeof(sockaddr_in6)) != -1;
 }
 
