@@ -54,8 +54,8 @@ void addr::update(bool reverse)
     }
 
     // if not reverse and ip and port are valid
-    sockaddr_in in;
-    sockaddr_in6 in6;
+    sockaddr_in in = {};
+    sockaddr_in6 in6 = {};
 
     // check whether ip of IPV4 or IPV6
     IPV4 = (inet_pton(AF_INET, ip.c_str(), &in.sin_addr)) ? 

@@ -21,6 +21,12 @@
 #include "addr.hpp"
 
 
+#ifdef _WIN32
+    #include <WinSock2.h>
+    #define linkHandler SOCKET
+#else
+    #define linkHandler int
+#endif
 
 /**
  * @mainpage Networking Library
@@ -237,7 +243,7 @@ public:
     ~link();
 
 private:
-    int fd=-1;
+    linkHandler fd=-1;
     bool ipv4=true, tcp=true;
     addr remote;
 
