@@ -5,11 +5,13 @@ Currently siphon supports
 - TCP / UDP   protocols
 - IPV4 / IPV6 addressing
 - Linux platform
+- Windows (Winsock2)
   
 siphon is currently under development.
 With following Upcoming features
-- Windows / Mac support
 - OS routing table management
+- Mac support
+
 
 
 
