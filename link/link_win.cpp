@@ -125,15 +125,20 @@ bool link::accept(link& child)
     return true;
 }
 
+const timeval checkTime = { 0, 0 };
+
 bool link::connect(addr adr)
 {
     adr.update();
     bool status = !::connect(fd, (sockaddr*)adr.getNAddr(), (ipv4) ? sizeof(sockaddr_in) : sizeof(sockaddr_in6));
     if (!status)
     {
-        int err = WSAGetLastError();
-        status = (err == WSAEWOULDBLOCK);
+        int err=0;
+        fd_set checkSet = { 1, fd };
+        err = select(0, nullptr, &checkSet, nullptr, &checkTime);
+        status = (err == 1);
     }
+
     return status;
 }
 
