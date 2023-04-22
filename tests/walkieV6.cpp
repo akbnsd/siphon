@@ -34,7 +34,7 @@ void listenAndPrint(link& lnk){
         this_thread::sleep_for(chrono::milliseconds(500));
         size = lnk.recv(data, 100, temp);
         if(size == -1) continue;
-        cout << "\n" << data << "\n                                  <<";
+        cout << "\n" << data << "\n                                  >>";
         memset(data, 0, 100);
     }
 
@@ -60,7 +60,7 @@ int main(){
 
         cout << "udp packet send and recieve mode\n";
         link lnk(port, link::IPV6 | link::UDP);
-        addr adr, temp;
+        addr adr = {}, temp = {};
         cout << "enter remote address:";
         cin >> adr.ip;
         cout << "enter remote port:";

@@ -22,7 +22,6 @@
 
 
 using namespace std;
-
 bool quit = false;
 
 void listenAndPrint(link& lnk){
@@ -34,7 +33,7 @@ void listenAndPrint(link& lnk){
         this_thread::sleep_for(chrono::milliseconds(500));
         size = lnk.recv(data, 100, temp);
         if(size == -1) continue;
-        cout << "\n" << data << "\n                                  <<";
+        cout << "\n" << data << "\n                                  >>";
         memset(data, 0, 100);
     }
 
@@ -75,8 +74,8 @@ int main(){
             cout << "                                  >>";
             cin >> data;
             lnk.send(data, 100, adr);
-            memset(data, 0, 100);
-        }
+                memset(data, 0, 100);
+        }   
     }
 
 

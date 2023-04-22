@@ -5,3 +5,5 @@ out/
 # editor / IDE configs
 .vscode/
 .vs/
+CMakeSettings.json
+
